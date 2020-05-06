@@ -2,6 +2,7 @@ package orlian.nasa.neo;
 
 
 import org.junit.Test;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -23,10 +24,13 @@ public class NeoServiceTest {
         NeoService service = retrofit.create(NeoService.class);
 
         //when
-        NeoFeed feed = service.getAsteroids("2020-04-28", "2020-04-29").execute().body();
+        NeoFeed feed = service.getAsteroids("2020-04-28", "2020-04-29").execute().body();  //Actually getting the info
+        Response<NeoFeed> response = service.getAsteroids("2020-04-28", "2020-04-29").execute();  //Just checking for response -usually the first step
 
         //then
-        assertNotNull(feed);
+        assertTrue(response.toString(), response.isSuccessful());  //to find errors in response
+        //NeoFeed feed = response.body();
+        //assertNotNull(feed);
         HashMap<String, List<NeoFeed.NearEarthObject>> nearEarthObjects = feed.nearEarthObjects;
         assertFalse(nearEarthObjects.isEmpty());
 
@@ -35,5 +39,13 @@ public class NeoServiceTest {
         assertNotNull(nearEarthObject.name);
         assertNotNull(nearEarthObject.nasaJplUrl);
         assertNotNull(nearEarthObject.hazardous);
+        List<NeoFeed.CloseApproachData> closeApproachData = nearEarthObject.closeApproachData;
+        assertNotNull(closeApproachData);
+        assertFalse(closeApproachData.isEmpty());
+        NeoFeed.CloseApproachData closeApproachData1 = closeApproachData.get(0);
+        assertNotNull(closeApproachData1.closeApproachDate);
+        assertNotNull(closeApproachData1.missDistance);
+        assertTrue(closeApproachData1.missDistance.lunar > 0);
+
     }
 }
