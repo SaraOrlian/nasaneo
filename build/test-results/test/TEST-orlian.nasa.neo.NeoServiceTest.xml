@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="orlian.nasa.neo.NeoServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-05T22:23:32" hostname="DESKTOP-L1VMM4Q" time="0.893">
-  <properties/>
-  <testcase name="getAsteroids" classname="orlian.nasa.neo.NeoServiceTest" time="0.893"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
