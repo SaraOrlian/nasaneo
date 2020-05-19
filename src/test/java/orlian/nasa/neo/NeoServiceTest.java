@@ -17,11 +17,7 @@ public class NeoServiceTest {
     @Test
     public void getAsteroids() throws IOException {
         //given
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.nasa.gov/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        NeoService service = retrofit.create(NeoService.class);
+        NeoService service = new NeoServiceFactory().getInstance();
 
         //when
         NeoFeed feed = service.getAsteroids("2020-04-28", "2020-04-29").execute().body();  //Actually getting the info
