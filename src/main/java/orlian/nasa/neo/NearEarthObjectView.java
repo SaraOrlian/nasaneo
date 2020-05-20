@@ -1,8 +1,13 @@
 package orlian.nasa.neo;
 
+import javax.inject.Singleton;
 import javax.swing.*;
 import java.awt.*;
 
+/*
+ * Display NearEarthObject
+ */
+@Singleton
 public class NearEarthObjectView extends JComponent{
 
     private NeoFeed.NearEarthObject neo;
